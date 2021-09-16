@@ -1,9 +1,12 @@
 from shell import init, options
+from services.calculateBalance import CalculateBalance
 
 itens = []
 
 if __name__ == "__main__":
     itens = init()
+
+    calculateBalance = CalculateBalance()
     
     while (True):
         option = options()
@@ -13,28 +16,32 @@ if __name__ == "__main__":
 
             exit()
         elif (option == 1):
-            print("\n> Digite o primeiro item e o seu tipo de saldo [(C)redor/(D)evedor]:")
+            print("\n> Digite o primeiro item da transação:")
             firstItemInput = input("$ ")
 
-            print("> Digite o segundo item e o seu tipo de saldo [(C)redor/(D)evedor]:")
+            print("Digite o tipo do saldo do primeiro item [(C)redor/(D)evedor]:")
+            firstItemBalanceType = input("$ ")
+            secondItemBalanceType = "credor" if (firstItemBalanceType == "d" or "devedor") else "devedor"
+
+            print("> Digite o segundo item da transação:")
             secondItemInput = input("$ ")
 
-            print("> Digite o valor do item:")
+            print("> Digite o valor da transação:")
             valueInput = input("$ R$")
 
-            temp = firstItemInput.lower().split(" ")
-            temp1 = secondItemInput.lower().split(" ")
-
             for item in itens:
-                if (temp[0] == item.name):                    
-                    item.setBalance(float(valueInput), temp[1]) 
-                elif (temp1[0] == item.name):                    
-                    item.setBalance(float(valueInput), temp1[1])                
+                if (firstItemInput == item.name):
+                    item.setBalance(float(valueInput), firstItemBalanceType) 
+                elif (secondItemInput == item.name):
+                    item.setBalance(float(valueInput), secondItemBalanceType)                
 
         elif (option == 2): # Temporary
             for item in itens:
                 print(item.name)
                 print(item.itemType)
                 print(item.balance)
+                print("\n")
+            
+            print(calculateBalance.accountingEquation(itens))
 
             exit()
