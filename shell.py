@@ -28,7 +28,13 @@ def init() -> list:
         if (itemType == "#"):
             break
 
-        itens.append(Item(itemName, itemType))
+        print("> Tipo de saldo [(C)redor, (D)evedor]:")
+        itemBalanceType = input("$ ")
+
+        if (itemBalanceType == "#"):
+            break
+
+        itens.append(Item(itemName, itemType, itemBalanceType))
 
     return itens
 
