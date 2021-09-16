@@ -1,16 +1,22 @@
 class Item:
 
-    def __init__(self, name: str, iType: str):
+    def __init__(self, name: str, itemType: str, balanceType: str):
         self.name = name
+        self.itemType = None
         self.balance = [0, 0]
-        self.iType = None
+        self.balanceType = None
 
-        if (iType.lower() == "a" or iType.lower() == "ativo"):
-            self.iType = "ativo"
-        elif (iType.lower() == "p" or iType.lower() == "passivo"):
-            self.iType = "passivo"
-        elif (iType.lower() == "pl" or iType.lower() == "patrimônio líquido"):
-            self.iType = "patrimônio líquido"
+        if (itemType.lower() == "a" or itemType.lower() == "ativo"):
+            self.itemType = "ativo"
+        elif (itemType.lower() == "p" or itemType.lower() == "passivo"):
+            self.itemType = "passivo"
+        elif (itemType.lower() == "pl" or itemType.lower() == "patrimônio líquido"):
+            self.itemType = "patrimônio líquido"
+
+        if (balanceType.lower() == "d" or balanceType.lower() == "devedor"):
+            self.balanceType = "devedor"
+        elif (balanceType.lower() == "c" or balanceType.lower() == "credor"):
+            self.balanceType = "credor"
 
     def setBalance(self, value: float, balanceType: str) -> None:
         if (balanceType.lower() == "c" or balanceType.lower() == "credor"):
@@ -19,4 +25,4 @@ class Item:
             self.balance[0] += value
 
     def __repr__(self) -> str:
-        return f'nome: {self.name}, type:{self.iType}'
+        return f'nome: {self.name}, type:{self.itemType}'
