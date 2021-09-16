@@ -1,5 +1,6 @@
 from shell import init, options
 from services.calculateBalance import CalculateBalance
+from services.file import File
 
 itens = []
 
@@ -21,7 +22,11 @@ if __name__ == "__main__":
 
             print("Digite o tipo do saldo do primeiro item [(C)redor/(D)evedor]:")
             firstItemBalanceType = input("$ ")
-            secondItemBalanceType = "credor" if (firstItemBalanceType == "d" or "devedor") else "devedor"
+
+            if (firstItemBalanceType == "d" or firstItemBalanceType == "devedor"):
+                secondItemBalanceType = "credor"
+            else:
+                secondItemBalanceType = "devedor"
 
             print("> Digite o segundo item da transação:")
             secondItemInput = input("$ ")
