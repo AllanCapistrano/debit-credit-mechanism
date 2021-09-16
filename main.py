@@ -34,7 +34,7 @@ if __name__ == "__main__":
         elif (option == 2): # Temporary
             for item in itens:
                 print(item.name)
-                print(item.iType)
+                print(item.itemType)
                 print(item.balance)
 
             exit()
