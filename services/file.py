@@ -25,7 +25,7 @@ class File:
 
         f.close()
 
-    def writeTransations(self, fileName: str, transation: str) -> None:
+    def writeTransation(self, fileName: str, transation: str) -> None:
         """ Write the transation in the file.
 
         Parameters
