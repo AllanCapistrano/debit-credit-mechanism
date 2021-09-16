@@ -2,7 +2,7 @@ from shell import init, options
 from services.calculateBalance import CalculateBalance
 from services.file import File
 
-TRANSATIONS_FILE = "transations.txt"
+TRANSACTIONS_FILE = "transactions.txt"
 BALANCE_SHEET = "balance_sheet.txt"
 
 itens = []
@@ -13,7 +13,7 @@ if __name__ == "__main__":
     file = File()
 
     # Creating files
-    file.createFile(TRANSATIONS_FILE)
+    file.createFile(TRANSACTIONS_FILE)
     file.createFile(BALANCE_SHEET)
 
     calculateBalance = CalculateBalance()
@@ -55,7 +55,7 @@ if __name__ == "__main__":
             f"{secondItemBalanceType} | valor R${valueInput}\n"
 
             # Write the transation
-            file.writeTransation(TRANSATIONS_FILE, transation)
+            file.writeTransaction(TRANSACTIONS_FILE, transation)
 
             for item in itens:
                 if (firstItemInput == item.name):
