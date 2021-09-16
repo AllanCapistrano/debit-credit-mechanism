@@ -12,10 +12,13 @@ if __name__ == "__main__":
 
     file = File()
 
+    # Creating files
     file.createFile(TRANSATIONS_FILE)
     file.createFile(BALANCE_SHEET)
 
     calculateBalance = CalculateBalance()
+
+    count = 0
     
     while (True):
         option = options()
@@ -28,7 +31,7 @@ if __name__ == "__main__":
             print("\n> Digite o primeiro item da transação:")
             firstItemInput = input("$ ")
 
-            print("Digite o tipo do saldo do primeiro item [(C)redor/(D)evedor]:")
+            print("Digite o tipo do saldo do primeiro item [(C)redor, (D)evedor]:")
             firstItemBalanceType = input("$ ")
 
             if (firstItemBalanceType == "d" or firstItemBalanceType == "devedor"):
@@ -42,11 +45,25 @@ if __name__ == "__main__":
             print("> Digite o valor da transação:")
             valueInput = input("$ R$")
 
+            if (firstItemBalanceType == "c"):
+                firstItemBalanceType = "credor"
+            elif (firstItemBalanceType == "d"):
+                firstItemBalanceType = "devedor"
+
+            transation = f"{count + 1}ª operação - {firstItemInput} saldo " + \
+            f"{firstItemBalanceType} | {secondItemInput} saldo " +\
+            f"{secondItemBalanceType} | valor R${valueInput}\n"
+
+            # Write the transation
+            file.writeTransation(TRANSATIONS_FILE, transation)
+
             for item in itens:
                 if (firstItemInput == item.name):
                     item.setBalance(float(valueInput), firstItemBalanceType) 
                 elif (secondItemInput == item.name):
-                    item.setBalance(float(valueInput), secondItemBalanceType)                
+                    item.setBalance(float(valueInput), secondItemBalanceType)
+
+            count += 1
 
         elif (option == 2): # Temporary
             for item in itens:
