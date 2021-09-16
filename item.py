@@ -18,11 +18,22 @@ class Item:
         elif (balanceType.lower() == "c" or balanceType.lower() == "credor"):
             self.balanceType = "credor"
 
-    def setBalance(self, value: float, itemType: str) -> None:
-        if (itemType.lower() == "c" or itemType.lower() == "credor"):
-            self.balance[1] += value
-        elif (itemType.lower() == "d" or itemType.lower() == "devedor"):
-            self.balance[0] += value
+    def setBalance(self, amount : float, balanceType: str) -> None:
+        """ Set balance amount.
+
+        Parameters
+        -----------
+        amount : :class:`float`
+            Transaction amount.
+
+        balanceType: :class:`str`
+            Balance type (`credor` or `devedor`)
+        """
+
+        if (balanceType.lower() == "d" or balanceType.lower() == "devedor"):
+            self.balance[0] += amount 
+        elif (balanceType.lower() == "c" or balanceType.lower() == "credor"):
+            self.balance[1] += amount 
 
     def __repr__(self) -> str:
         return f'nome: {self.name}, type:{self.itemType}'
