@@ -1,3 +1,7 @@
+import os
+
+DIRECTORY_NAME = "files"
+
 class File:
     
     def createFile(self, fileName: str) -> None:
@@ -9,12 +13,15 @@ class File:
             File name.
         """
         
-        
         # If file name does not have .txt
         if (fileName.lower().find(".txt") == -1):
             fileName += ".txt"
 
-        f = open(fileName, "w")
+        # Create a directory if not exists.
+        if(not os.path.isdir(DIRECTORY_NAME)):
+            os.makedirs(f'{DIRECTORY_NAME}')
+
+        f = open(f'{DIRECTORY_NAME}/{fileName}', 'w')
 
         f.close()
 
@@ -29,5 +36,5 @@ class File:
             Transation... 
         """
         
-        with open(fileName, "a") as f:
+        with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
             f.write(transation)
