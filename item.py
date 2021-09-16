@@ -18,10 +18,10 @@ class Item:
         elif (balanceType.lower() == "c" or balanceType.lower() == "credor"):
             self.balanceType = "credor"
 
-    def setBalance(self, value: float, balanceType: str) -> None:
-        if (balanceType.lower() == "c" or balanceType.lower() == "credor"):
+    def setBalance(self, value: float, itemType: str) -> None:
+        if (itemType.lower() == "c" or itemType.lower() == "credor"):
             self.balance[1] += value
-        elif (balanceType.lower() == "d" or balanceType.lower() == "devedor"):
+        elif (itemType.lower() == "d" or itemType.lower() == "devedor"):
             self.balance[0] += value
 
     def __repr__(self) -> str:
