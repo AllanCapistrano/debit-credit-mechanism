@@ -2,10 +2,18 @@ from shell import init, options
 from services.calculateBalance import CalculateBalance
 from services.file import File
 
+TRANSATIONS_FILE = "transations.txt"
+BALANCE_SHEET = "balance_sheet.txt"
+
 itens = []
 
 if __name__ == "__main__":
     itens = init()
+
+    file = File()
+
+    file.createFile(TRANSATIONS_FILE)
+    file.createFile(BALANCE_SHEET)
 
     calculateBalance = CalculateBalance()
     
