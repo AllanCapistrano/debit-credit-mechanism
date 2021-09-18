@@ -50,12 +50,12 @@ if __name__ == "__main__":
             elif (firstItemBalanceType == "d"):
                 firstItemBalanceType = "devedor"
 
-            transation = f"{count + 1}ª operação - {firstItemInput} saldo " + \
+            transaction = f"{count + 1}ª operação - {firstItemInput} saldo " + \
             f"{firstItemBalanceType} | {secondItemInput} saldo " +\
             f"{secondItemBalanceType} | valor R${valueInput}\n"
 
-            # Write the transation
-            file.writeTransaction(TRANSACTIONS_FILE, transation)
+            # Write the transaction
+            file.writeTransaction(TRANSACTIONS_FILE, transaction)
 
             for item in itens:
                 if (firstItemInput == item.name):
