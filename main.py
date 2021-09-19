@@ -74,4 +74,6 @@ if __name__ == "__main__":
             
             print(calculateBalance.accountingEquation(itens))
 
+            file.writeTable(BALANCE_SHEET)
+
             exit()
