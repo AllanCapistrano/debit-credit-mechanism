@@ -1,5 +1,7 @@
 import os
 
+from services.table import Table
+
 DIRECTORY_NAME = "files"
 
 class File:
@@ -38,3 +40,18 @@ class File:
         
         with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
             f.write(transation)
+
+    def writeTable(self, fileName: str) -> None:
+        """ Write the table in the file.
+
+        Parameters
+        -----------
+        fileName: :class:`str`
+            File name.
+        transation: :class:`str`
+            Transation... 
+        """
+        
+        table = Table()
+
+        table.writeTableHeader(fileName)
