@@ -30,34 +30,34 @@ class Table:
         num: :class:`int`
             Number of vertical bars.
         """
+
+        line = "+"
+            
+        if (num == 0):
+            for x in range(NUMBER_OF_CHARACTERS - 2):
+                line += "-"
+
+        elif (num == 1):
+            line = "+"
+
+            for x in range(NUMBER_OF_CHARACTERS - 3):
+                if (x == 52):
+                    line += "|"
+
+                line += "-"
+            
+        elif (num == 2):
+            line = "+"
+
+            for x in range(NUMBER_OF_CHARACTERS - 4):
+                if (x == 52 or x == 64):
+                    line += "|"
+
+                line += "-"
+            
+        line += "+"
         
         with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
-            line = "+"
-            
-            if (num == 0):
-                for x in range(NUMBER_OF_CHARACTERS - 2):
-                    line += "-"
-
-            elif (num == 1):
-                line = "+"
-
-                for x in range(NUMBER_OF_CHARACTERS - 3):
-                    if (x == 52):
-                        line += "|"
-
-                    line += "-"
-                
-            elif (num == 2):
-                line = "+"
-
-                for x in range(NUMBER_OF_CHARACTERS - 4):
-                    if (x == 52 or x == 64):
-                        line += "|"
-
-                    line += "-"
-                
-            line += "+"
-                
             f.write(line)
             f.write("\n")
 
