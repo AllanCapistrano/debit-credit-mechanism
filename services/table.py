@@ -1,6 +1,7 @@
 DIRECTORY_NAME = "files"
 NUMBER_OF_CHARACTERS = 80
 TABLE_TITLE = "Balancete de verificação"
+BARS_POSITIONS = [52, 64]
 
 class Table:
 
@@ -42,7 +43,7 @@ class Table:
             line = "+"
 
             for x in range(NUMBER_OF_CHARACTERS - 3):
-                if (x == 52):
+                if (x == BARS_POSITIONS[0]):
                     line += "|"
 
                 line += "-"
@@ -51,7 +52,7 @@ class Table:
             line = "+"
 
             for x in range(NUMBER_OF_CHARACTERS - 4):
-                if (x == 52 or x == 64):
+                if (x == BARS_POSITIONS[0] or x == BARS_POSITIONS[1]):
                     line += "|"
 
                 line += "-"
