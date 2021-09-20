@@ -1,5 +1,6 @@
 DIRECTORY_NAME = "files"
 NUMBER_OF_CHARACTERS = 80
+TABLE_TITLE = "Balancete de verificação"
 
 class Table:
 
@@ -70,8 +71,15 @@ class Table:
             File name.
         """
 
+        line = f"|{TABLE_TITLE}"
+
+        for x in range((NUMBER_OF_CHARACTERS - 2) - (len(TABLE_TITLE))):
+            line += " "
+        
+        line += "|"
+
         with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
-            f.write("|Balancete de verificação                                                      |")
+            f.write(line)
             f.write("\n")
 
     def __writeFirstRow__(self, fileName: str) -> None:
