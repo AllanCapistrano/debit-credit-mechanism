@@ -1,4 +1,5 @@
 DIRECTORY_NAME = "files"
+NUMBER_OF_CHARACTERS = 80
 
 class Table:
 
@@ -34,13 +35,13 @@ class Table:
             line = "+"
             
             if (num == 0):
-                for x in range(0, 78):
+                for x in range(NUMBER_OF_CHARACTERS - 2):
                     line += "-"
 
             elif (num == 1):
                 line = "+"
 
-                for x in range(0, 77):
+                for x in range(NUMBER_OF_CHARACTERS - 3):
                     if (x == 52):
                         line += "|"
 
@@ -49,7 +50,7 @@ class Table:
             elif (num == 2):
                 line = "+"
 
-                for x in range(0, 76):
+                for x in range(NUMBER_OF_CHARACTERS - 4):
                     if (x == 52 or x == 64):
                         line += "|"
 
