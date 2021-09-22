@@ -4,6 +4,7 @@ TABLE_TITLE = "Balancete de verificação"
 BARS_POSITIONS = [52, 64]
 FIRST_ROW_COLUMS = ["Contas", "Saldos"]
 FISRT_COLUMN_LENGTH = 52
+SECOND_ROW_COLUMS = ["Devedor", "Credor"]
 SECOND_COLUMN_LENGTH = [12, 12]
 
 class Table:
@@ -131,6 +132,30 @@ class Table:
             File name.
         """
 
-        with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
-            f.write("|                                                    |Devedor     |Credor      |")
-            f.write("\n")
+        if (
+            SECOND_COLUMN_LENGTH[0] >= len(SECOND_ROW_COLUMS[0]) and 
+            SECOND_COLUMN_LENGTH[1] >= len(SECOND_ROW_COLUMS[1])
+        ):
+            line = "|"
+
+            for x in range(FISRT_COLUMN_LENGTH):
+                line += " "
+
+            line += f"|{SECOND_ROW_COLUMS[0]}"
+
+            for x in range(SECOND_COLUMN_LENGTH[0] - len(SECOND_ROW_COLUMS[0])):
+                line += " "
+
+            line += f"|{SECOND_ROW_COLUMS[1]}"
+
+            for x in range(SECOND_COLUMN_LENGTH[1] - len(SECOND_ROW_COLUMS[1])):
+                line += " "
+
+            line += "|"
+
+            with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
+                f.write(line)
+                f.write("\n")
+        else:
+            print("Erro ao definir SECOND_ROW_COLUMS!")
+            exit()
