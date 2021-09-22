@@ -2,6 +2,9 @@ DIRECTORY_NAME = "files"
 NUMBER_OF_CHARACTERS = 80
 TABLE_TITLE = "Balancete de verificação"
 BARS_POSITIONS = [52, 64]
+FIRST_ROW_COLUMS = ["Contas", "Saldos"]
+FISRT_COLUMN_LENGTH = 52
+SECOND_COLUMN_LENGTH = [12, 12]
 
 class Table:
 
@@ -91,10 +94,33 @@ class Table:
         fileName: :class:`str`
             File name.
         """
+
+        if (
+            FISRT_COLUMN_LENGTH > len(FIRST_ROW_COLUMS[0]) and 
+            (SECOND_COLUMN_LENGTH[0] + SECOND_COLUMN_LENGTH[1] + 1) > 
+            len(FIRST_ROW_COLUMS[1])
+        ):
+            line = f"|{FIRST_ROW_COLUMS[0]}"
+
+            for x in range(FISRT_COLUMN_LENGTH - len(FIRST_ROW_COLUMS[0])):
+                line += " "
+
+            line += f"|{FIRST_ROW_COLUMS[1]}"
+
+            for x in range(
+                (SECOND_COLUMN_LENGTH[0] + SECOND_COLUMN_LENGTH[1] + 1) - 
+                len(FIRST_ROW_COLUMS[1])
+                ):
+                line += " "
+
+            line += "|"
         
-        with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
-            f.write("|Contas                                              |Saldos                   |")
-            f.write("\n")
+            with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
+                f.write(line)
+                f.write("\n")
+        else:
+            print("Erro ao definir FIRST_ROW_COLUMS!")
+            exit()
 
     def __writeSecondRow__(self, fileName: str) -> None:
         """ Write the table second row in the file.
