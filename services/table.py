@@ -17,17 +17,32 @@ class Table:
         fileName: :class:`str`
             File name.
         """
-        
-        self.__writeLine__(fileName)
-        self.__writeTitle__(fileName)
-        self.__writeLine__(fileName)
-        self.__writeFirstRow__(fileName)
-        self.__writeLine__(fileName, 1)
-        self.__writeSecondRow__(fileName)
-        self.__writeLine__(fileName, 2)
 
-    def __writeLine__(self, fileName: str, num: int = 0) -> None:
-        """ Write the table line in the file.
+        self.__writer__(fileName, self.__makeLine__())
+        self.__writer__(fileName, self.__makeTitle__())
+        self.__writer__(fileName, self.__makeLine__())
+        self.__writer__(fileName, self.__makeFirstRow__())
+        self.__writer__(fileName, self.__makeLine__(1))
+        self.__writer__(fileName, self.__makeSecondRow__())
+        self.__writer__(fileName, self.__makeLine__(2))
+
+    def __writer__(self, fileName: str, text: str) -> None:
+        """ Write text in the file
+
+        Parameters
+        -----------
+        fileName: :class:`str`
+            File name.
+        text: :class:`str`
+            Text that will be written .
+        """
+        
+        with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
+            f.write(text)
+            f.write("\n")
+
+    def __makeLine__(self, num: int = 0) -> str:
+        """ Make table line.
 
         Parameters
         -----------
@@ -35,6 +50,10 @@ class Table:
             File name.
         num: :class:`int`
             Number of vertical bars.
+
+        Returns
+        -----------
+        line: :class:`str`
         """
 
         line = "+"
@@ -62,38 +81,46 @@ class Table:
                 line += "-"
             
         line += "+"
-        
-        with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
-            f.write(line)
-            f.write("\n")
 
-    def __writeTitle__(self, fileName: str) -> None:
-        """ Write the table title in the file.
+        return line
+
+    def __makeTitle__(self) -> str:
+        """ Make table title.
 
         Parameters
         -----------
         fileName: :class:`str`
             File name.
+        num: :class:`int`
+            Number of vertical bars.
+
+        Returns
+        -----------
+        title: :class:`str`
         """
 
-        line = f"|{TABLE_TITLE}"
+        title = f"|{TABLE_TITLE}"
 
         for x in range((NUMBER_OF_CHARACTERS - 2) - (len(TABLE_TITLE))):
-            line += " "
+            title += " "
         
-        line += "|"
+        title += "|"
 
-        with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
-            f.write(line)
-            f.write("\n")
+        return title
 
-    def __writeFirstRow__(self, fileName: str) -> None:
-        """ Write the table first row in the file.
+    def __makeFirstRow__(self) -> str:
+        """ Make table first row.
 
         Parameters
         -----------
         fileName: :class:`str`
             File name.
+        num: :class:`int`
+            Number of vertical bars.
+
+        Returns
+        -----------
+        firstRow: :class:`str`
         """
 
         if (
@@ -101,61 +128,63 @@ class Table:
             (SECOND_COLUMN_LENGTH[0] + SECOND_COLUMN_LENGTH[1] + 1) > 
             len(FIRST_ROW_COLUMS[1])
         ):
-            line = f"|{FIRST_ROW_COLUMS[0]}"
+            firstRow = f"|{FIRST_ROW_COLUMS[0]}"
 
             for x in range(FISRT_COLUMN_LENGTH - len(FIRST_ROW_COLUMS[0])):
-                line += " "
+                firstRow += " "
 
-            line += f"|{FIRST_ROW_COLUMS[1]}"
+            firstRow += f"|{FIRST_ROW_COLUMS[1]}"
 
             for x in range(
                 (SECOND_COLUMN_LENGTH[0] + SECOND_COLUMN_LENGTH[1] + 1) - 
                 len(FIRST_ROW_COLUMS[1])
                 ):
-                line += " "
+                firstRow += " "
 
-            line += "|"
-        
-            with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
-                f.write(line)
-                f.write("\n")
+            firstRow += "|"
+
+            return firstRow
         else:
             print("Erro ao definir FIRST_ROW_COLUMS!")
             exit()
 
-    def __writeSecondRow__(self, fileName: str) -> None:
-        """ Write the table second row in the file.
+    def __makeSecondRow__(self) -> str:
+        """ Make table second row.
 
         Parameters
         -----------
         fileName: :class:`str`
             File name.
+        num: :class:`int`
+            Number of vertical bars.
+
+        Returns
+        -----------
+        secondRow: :class:`str`
         """
 
         if (
             SECOND_COLUMN_LENGTH[0] >= len(SECOND_ROW_COLUMS[0]) and 
             SECOND_COLUMN_LENGTH[1] >= len(SECOND_ROW_COLUMS[1])
         ):
-            line = "|"
+            secondRow = "|"
 
             for x in range(FISRT_COLUMN_LENGTH):
-                line += " "
+                secondRow += " "
 
-            line += f"|{SECOND_ROW_COLUMS[0]}"
+            secondRow += f"|{SECOND_ROW_COLUMS[0]}"
 
             for x in range(SECOND_COLUMN_LENGTH[0] - len(SECOND_ROW_COLUMS[0])):
-                line += " "
+                secondRow += " "
 
-            line += f"|{SECOND_ROW_COLUMS[1]}"
+            secondRow += f"|{SECOND_ROW_COLUMS[1]}"
 
             for x in range(SECOND_COLUMN_LENGTH[1] - len(SECOND_ROW_COLUMS[1])):
-                line += " "
+                secondRow += " "
 
-            line += "|"
+            secondRow += "|"
 
-            with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
-                f.write(line)
-                f.write("\n")
+            return secondRow
         else:
             print("Erro ao definir SECOND_ROW_COLUMS!")
             exit()
