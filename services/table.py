@@ -9,6 +9,7 @@ FIRST_ROW_COLUMS = ["Contas", "Saldos"]
 FISRT_COLUMN_LENGTH = 52
 SECOND_ROW_COLUMS = ["Devedor", "Credor"]
 SECOND_COLUMN_LENGTH = [12, 12]
+TOTAL_ROW = "Total"
 
 class Table:
 
@@ -166,7 +167,7 @@ class Table:
         Parameters
         -----------
         item: :class:`Item`
-            Item...
+            Item that will be written.
 
         Returns
         -----------
@@ -211,3 +212,31 @@ class Table:
             itemLine += "|"
 
         return itemLine
+
+    def makeTotal(self, totalBalance: float) -> str:
+        """ Make the total row of the table.
+
+        Parameters
+        -----------
+        totalBalance: :class:`float`
+            Total balance.
+
+        Returns
+        -----------
+        totalLine: :class:`str`
+        """
+
+        totalLine = f"|{TOTAL_ROW}"
+
+        for x in range(0, (FISRT_COLUMN_LENGTH - len(TOTAL_ROW))):
+            totalLine += " "
+        
+        for y in range(0, 2):
+            totalLine += f"|{totalBalance}"
+            
+            for x in range(0, (SECOND_COLUMN_LENGTH[0] - len(str(totalBalance)))):
+                totalLine += " "
+            
+        totalLine += "|"
+
+        return totalLine
