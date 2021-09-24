@@ -5,6 +5,20 @@ from services.table import Table
 DIRECTORY_NAME = "files"
 
 class File:
+
+    def __writer__(self, fileName: str, text: str) -> None:
+        """ Write text in the file
+
+        Parameters
+        -----------
+        fileName: :class:`str`
+            File name.
+        text: :class:`str`
+            Text that will be written .
+        """
+        
+        with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
+            f.write(text + "\n")
     
     def createFile(self, fileName: str) -> None:
         """ Create a file
@@ -27,19 +41,18 @@ class File:
 
         f.close()
 
-    def writeTransaction(self, fileName: str, transation: str) -> None:
+    def writeTransaction(self, fileName: str, transaction: str) -> None:
         """ Write the transaction in the file.
 
         Parameters
         -----------
         fileName: :class:`str`
             File name.
-        transation: :class:`str`
+        transaction: :class:`str`
             Transation... 
         """
-        
-        with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
-            f.write(transation)
+
+        self.__writer__(fileName, transaction)
 
     def writeTable(self, fileName: str) -> None:
         """ Write the table in the file.
@@ -52,6 +65,25 @@ class File:
             Transation... 
         """
         
+        self.__writeTableHeader__(fileName)
+
+
+    def __writeTableHeader__(self, fileName: str) -> None:
+        """ Write the table header in the file.
+
+        Parameters
+        -----------
+        fileName: :class:`str`
+            File name.
+        """
+
         table = Table()
 
-        table.writeTableHeader(fileName)
+        self.__writer__(fileName, table.makeLine())
+        self.__writer__(fileName, table.makeTitle())
+        self.__writer__(fileName, table.makeLine())
+        self.__writer__(fileName, table.makeFirstRow())
+        self.__writer__(fileName, table.makeLine(1))
+        self.__writer__(fileName, table.makeSecondRow())
+        self.__writer__(fileName, table.makeLine(2))
+
