@@ -1,6 +1,7 @@
 import os
 
 from services.table import Table
+from services.calculateBalance import CalculateBalance
 
 DIRECTORY_NAME = "files"
 
@@ -49,24 +50,24 @@ class File:
         fileName: :class:`str`
             File name.
         transaction: :class:`str`
-            Transation... 
+            Ongoing transaction.
         """
 
         self.__writer__(fileName, transaction)
 
-    def writeTable(self, fileName: str) -> None:
+    def writeTable(self, fileName: str, itens: list) -> None:
         """ Write the table in the file.
 
         Parameters
         -----------
         fileName: :class:`str`
             File name.
-        transation: :class:`str`
-            Transation... 
+        itens: :class:`list`
+            List of itens
         """
         
         self.__writeTableHeader__(fileName)
-
+        self.__writeTableBody__(fileName, itens)
 
     def __writeTableHeader__(self, fileName: str) -> None:
         """ Write the table header in the file.
@@ -87,3 +88,25 @@ class File:
         self.__writer__(fileName, table.makeSecondRow())
         self.__writer__(fileName, table.makeLine(2))
 
+    def __writeTableBody__(self, fileName: str, itens: list) -> None:
+        """ Write the table body in the file.
+
+        Parameters
+        -----------
+        fileName: :class:`str`
+            File name.
+        itens: :class:`list`
+            List of itens
+        """
+        
+        table = Table()
+        calculateBalance = CalculateBalance()
+        totalBalance = calculateBalance.totalBalance(itens)
+
+        for item in itens:
+            self.__writer__(fileName, table.makeBody(item))
+            self.__writer__(fileName, table.makeLine(2))
+
+        # Make the total row.
+        self.__writer__(fileName, table.makeTotal(totalBalance))
+        self.__writer__(fileName, table.makeLine())
