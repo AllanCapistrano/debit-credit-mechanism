@@ -50,3 +50,29 @@ class CalculateBalance:
             return asset
 
         return None
+
+    def totalBalance(self, itens: list) -> float:
+        """ Calculation of the total balance.
+
+        Parameters
+        -----------
+        itens: :class:`list`
+            List of itens
+
+        Returns
+        -----------
+        total: :class:`float`
+        """
+        
+        total = [0, 0]
+        
+        for item in itens:
+            if (item.balanceType == "devedor"):
+                total[0] += self.total(item)
+            elif (item.balanceType == "credor"):
+                total[1] += self.total(item)
+
+        if (total[0] == total[1]):
+            return total[0]
+        else:
+            return "Erro! Os valores são diferentes."
