@@ -9,39 +9,7 @@ SECOND_COLUMN_LENGTH = [12, 12]
 
 class Table:
 
-    def writeTableHeader(self, fileName: str) -> None:
-        """ Write the table header in the file.
-
-        Parameters
-        -----------
-        fileName: :class:`str`
-            File name.
-        """
-
-        self.__writer__(fileName, self.__makeLine__())
-        self.__writer__(fileName, self.__makeTitle__())
-        self.__writer__(fileName, self.__makeLine__())
-        self.__writer__(fileName, self.__makeFirstRow__())
-        self.__writer__(fileName, self.__makeLine__(1))
-        self.__writer__(fileName, self.__makeSecondRow__())
-        self.__writer__(fileName, self.__makeLine__(2))
-
-    def __writer__(self, fileName: str, text: str) -> None:
-        """ Write text in the file
-
-        Parameters
-        -----------
-        fileName: :class:`str`
-            File name.
-        text: :class:`str`
-            Text that will be written .
-        """
-        
-        with open(f'{DIRECTORY_NAME}/{fileName}', "a") as f:
-            f.write(text)
-            f.write("\n")
-
-    def __makeLine__(self, num: int = 0) -> str:
+    def makeLine(self, num: int = 0) -> str:
         """ Make table line.
 
         Parameters
@@ -84,7 +52,7 @@ class Table:
 
         return line
 
-    def __makeTitle__(self) -> str:
+    def makeTitle(self) -> str:
         """ Make table title.
 
         Parameters
@@ -108,7 +76,7 @@ class Table:
 
         return title
 
-    def __makeFirstRow__(self) -> str:
+    def makeFirstRow(self) -> str:
         """ Make table first row.
 
         Parameters
@@ -148,7 +116,7 @@ class Table:
             print("Erro ao definir FIRST_ROW_COLUMS!")
             exit()
 
-    def __makeSecondRow__(self) -> str:
+    def makeSecondRow(self) -> str:
         """ Make table second row.
 
         Parameters
