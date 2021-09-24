@@ -65,15 +65,9 @@ if __name__ == "__main__":
 
             count += 1
 
-        elif (option == 2): # Temporary
-            for item in itens:
-                print(item.name)
-                print(item.itemType)
-                print(item.balance)
-                print("\n")
+        elif (option == 2):
+            file.writeTable(BALANCE_SHEET, itens)
             
-            print(calculateBalance.accountingEquation(itens))
-
-            file.writeTable(BALANCE_SHEET)
+            print("> Balancete gerado com sucesso!")
 
             exit()
