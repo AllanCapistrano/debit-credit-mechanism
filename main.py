@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
             transaction = f"{count + 1}ª operação - {firstItemInput} saldo " + \
             f"{firstItemBalanceType} | {secondItemInput} saldo " +\
-            f"{secondItemBalanceType} | valor R${valueInput}\n"
+            f"{secondItemBalanceType} | valor R${valueInput}"
 
             # Write the transaction
             file.writeTransaction(TRANSACTIONS_FILE, transaction)
