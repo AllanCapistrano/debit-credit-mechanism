@@ -1,3 +1,6 @@
+from services.calculateBalance import CalculateBalance
+from item import Item
+
 DIRECTORY_NAME = "files"
 NUMBER_OF_CHARACTERS = 80
 TABLE_TITLE = "Balancete de verificação"
@@ -156,3 +159,55 @@ class Table:
         else:
             print("Erro ao definir SECOND_ROW_COLUMS!")
             exit()
+
+    def makeBody(self, item: Item) -> str:
+        """ Make table body.
+
+        Parameters
+        -----------
+        item: :class:`Item`
+            Item...
+
+        Returns
+        -----------
+        itemLine: :class:`str`
+        """
+        
+        calculateBalance = CalculateBalance()
+
+        itemLine = f"|{item.name}"
+
+        for x in range(0, (FISRT_COLUMN_LENGTH - len(item.name))):
+            itemLine += " "
+
+        if (item.balanceType == "devedor"):
+            balance = calculateBalance.total(item)
+
+            itemLine += f"|{balance}"
+
+            for x in range(0, SECOND_COLUMN_LENGTH[0] - len(str(balance))):
+                itemLine += " "
+
+            itemLine += "|"
+            
+            for x in range(0, SECOND_COLUMN_LENGTH[1]):
+                itemLine += " "
+
+            itemLine += "|"
+        
+        elif (item.balanceType == "credor"):
+            balance = calculateBalance.total(item)
+
+            itemLine += "|"
+
+            for x in range(0, SECOND_COLUMN_LENGTH[0]):
+                itemLine += " "
+
+            itemLine += f"|{balance}"
+
+            for x in range(0, SECOND_COLUMN_LENGTH[1] - len(str(balance))):
+                itemLine += " "
+
+            itemLine += "|"
+
+        return itemLine
